@@ -5,3 +5,8 @@ on:
     branches: [master]
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Docker Version
+        run: docker --version
