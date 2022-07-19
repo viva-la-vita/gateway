@@ -1,0 +1,16 @@
+version: "3.6"
+
+services:
+  nginx:
+    image: gateway
+    build:
+      context: .
+      args: 
+        - CLOUDFLARE_TOKEN=${CLOUDFLARE_TOKEN}
+    ports:
+      - 80:80
+      - 443:443
+    container_name: gateway
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
