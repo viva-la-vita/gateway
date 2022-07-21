@@ -1,0 +1,6 @@
+services:
+  nginx:
+    build:
+      context: .
+      args: 
+        - CLOUDFLARE_TOKEN=${CLOUDFLARE_TOKEN}
