@@ -1,16 +1,7 @@
 FROM nginx:1.23.0
 
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
-ENV LC_ALL=en_US.UTF-8
-
-RUN echo "Asia/Shanghai" > /etc/timezone
-
 RUN apt update && \
     apt install -y wget cron certbot python3-certbot-nginx python3-certbot-dns-cloudflare
-
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY conf.d /etc/nginx/conf.d
 
 ARG CLOUDFLARE_TOKEN
 
@@ -22,7 +13,10 @@ RUN certbot certonly -n --agree-tos -d *.viva-la-vita.org \
 --dns-cloudflare --dns-cloudflare-credentials /root/cloudflare.ini \
 --dns-cloudflare-propagation-seconds 60
 
-RUN certbot install --nginx --cert-name viva-la-vita.org -d forum.viva-la-vita.org
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY conf.d /etc/nginx/conf.d
+
+RUN certbot install --nginx --cert-name viva-la-vita.org -d bbs.viva-la-vita.org -d api.viva-la-vita.org
 
 RUN echo "nginx -s reload" > /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh &&\
     chmod +x /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh
