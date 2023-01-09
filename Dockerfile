@@ -1,4 +1,4 @@
-FROM nginx:1.23.0
+FROM nginx:1.23
 
 RUN apt update && \
     apt install -y wget cron certbot python3-certbot-nginx python3-certbot-dns-cloudflare
