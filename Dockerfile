@@ -16,7 +16,7 @@ RUN certbot certonly -n --agree-tos -d *.viva-la-vita.org \
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY conf.d /etc/nginx/conf.d
 
-RUN certbot install --nginx --cert-name viva-la-vita.org -d bbs.viva-la-vita.org -d admin.viva-la-vita.org -d api.viva-la-vita.org -d cms.viva-la-vita.org -d mail.viva-la-vita.org
+RUN certbot install --nginx --cert-name viva-la-vita.org -d bbs.viva-la-vita.org -d admin.viva-la-vita.org -d api.viva-la-vita.org
 
 RUN echo "nginx -s reload" > /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh &&\
     chmod +x /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh
